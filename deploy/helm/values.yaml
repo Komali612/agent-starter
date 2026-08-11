@@ -1,0 +1,23 @@
+# Per-agent Helm values. The chart itself is frozen.
+image:
+  repository: my-agent
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicas: 1
+
+service:
+  port: 8080
+
+# Plain env injected into the pod. pydantic reads every AGENT_* automatically.
+env:
+  AGENT_NAME: my-agent
+  AGENT_LOG_LEVEL: INFO
+  # AGENT_MODEL: claude-sonnet-5
+
+# Secret env pulled from a k8s Secret you create separately (never committed):
+# secretEnv:
+#   AGENT_SLACK__TOKEN: {name: my-agent-secrets, key: slack-token}
+secretEnv: {}
+
+resources: {}

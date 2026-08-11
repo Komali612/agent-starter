@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-agent"                       # ← rename to your agent
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "agent-core==0.1.0",                # add connector extras as needed, e.g. agent-core[jira,slack]
+]
+
+[project.scripts]
+agent = "agent.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent"]
