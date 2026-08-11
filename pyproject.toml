@@ -7,7 +7,9 @@ name = "my-agent"                       # ← rename to your agent
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
-    "agent-core==0.1.0",                # add connector extras as needed, e.g. agent-core[jira,slack]
+    # Pulled from the agent-core git repo by tag. For connector extras, use:
+    #   "agent-core[jira,slack] @ git+https://github.com/Komali612/agent-core@v0.1.0"
+    "agent-core @ git+https://github.com/Komali612/agent-core@v0.1.0",
 ]
 
 [project.scripts]
