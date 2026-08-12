@@ -13,11 +13,12 @@ service:
 env:
   AGENT_NAME: my-agent
   AGENT_LOG_LEVEL: INFO
-  # AGENT_MODEL: claude-sonnet-5
+  # AGENT_MODEL: claude-opus-5        # give the agent an LLM brain
 
-# Secret env pulled from a k8s Secret you create separately (never committed):
+# Secrets from a k8s Secret you create separately (never committed). The LLM
+# brain needs ANTHROPIC_API_KEY:
 # secretEnv:
-#   AGENT_SLACK__TOKEN: {name: my-agent-secrets, key: slack-token}
+#   ANTHROPIC_API_KEY: {name: my-agent-secrets, key: anthropic-key}
 secretEnv: {}
 
 resources: {}

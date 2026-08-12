@@ -1,21 +1,25 @@
 """FROZEN — identical in every agent repo. Do not edit.
 
-Wires the parts that vary (name, prompt, skills, handler) into an Agent. Edit
-prompts/system.md, skills/skills.py, and custom/handler.py instead.
+Assembles the agent from the parts that vary: the prompt, the markdown skills in
+``skills/``, and the code tools in ``tools/``. With no model set (settings.model
+is None) the brain runs keyless.
 """
-from agent_core import Agent
+from pathlib import Path
+
+from agent_core import Agent, load_skills
 
 from .config import settings
-from .custom.handler import Handler
 from .prompts import SYSTEM_PROMPT
-from .skills import SKILLS
+from .tools import TOOLS
+
+_SKILLS_DIR = Path(__file__).parent / "skills"
 
 
 def build_agent() -> Agent:
     return Agent(
         name=settings.name,
         prompt=SYSTEM_PROMPT,
-        skills=SKILLS,
-        handler=Handler(),
+        skills=load_skills(_SKILLS_DIR),
+        tools=TOOLS,
         model=settings.model,
     )
