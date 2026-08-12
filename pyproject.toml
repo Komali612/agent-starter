@@ -17,3 +17,8 @@ agent = "agent.main:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agent"]
+
+[tool.hatch.metadata]
+# agent-core is a direct (git URL) reference; hatchling requires opting in.
+# (Not needed once you install agent-core from a version index instead of git.)
+allow-direct-references = true
