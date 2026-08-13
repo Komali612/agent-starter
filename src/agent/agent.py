@@ -1,8 +1,7 @@
 """FROZEN — identical in every agent repo. Do not edit.
 
-Assembles the agent from the parts that vary: the prompt, the markdown skills in
-``skills/``, and the code tools in ``tools/``. With no model set (settings.model
-is None) the brain runs keyless.
+Assembles the agent from its prompt, its markdown skills, and its code tools.
+Edit prompts/system.md, skills/*.md, and tools/tools.py instead.
 """
 from pathlib import Path
 
@@ -12,14 +11,14 @@ from .config import settings
 from .prompts import SYSTEM_PROMPT
 from .tools import TOOLS
 
-_SKILLS_DIR = Path(__file__).parent / "skills"
+_SKILLS_DIR = Path(__file__).resolve().parent / "skills"
 
 
 def build_agent() -> Agent:
     return Agent(
         name=settings.name,
         prompt=SYSTEM_PROMPT,
-        skills=load_skills(_SKILLS_DIR),
-        tools=TOOLS,
-        model=settings.model,
+        skills=load_skills(_SKILLS_DIR),   # markdown docs
+        tools=TOOLS,                        # code the LLM can call
+        model=settings.model,               # set AGENT_MODEL to enable the brain
     )
